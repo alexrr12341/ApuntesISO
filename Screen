@@ -1,0 +1,35 @@
+Creacion y conexion
+--------------------
+
+Creacion-> screen -S {Nombre}
+Conexion-> screen -d {Nombre}
+Listar-> screen -ls
+
+Comandos
+-----------
+Ctrl+a K -> Matar un programa
+Ctrl+a : {Comando} -> Hacer un comando
+
+Creacion de Ventanas
+---------------------
+Ctrl+a Shift+s -> Dividir en dos regiones
+Ctrl+a TAB -> Cambiar foco
+Ctrl+a SHIFT+C -> Crear nuevas ventanas
+Ctrl+a Shift+x ->Cerrar ventana actual
+Ctrl+a Shift+q-> Cerrar todas las ventanas
+
+Multiusuario
+------------
+
+Ctrl+a : multiuser on -> Habilitas el modo multiusuario
+
+screen -x {Nombre} -> Conectarnos en un screen
+
+Ctrl+a : acladd {usuarios} -> Añades usuarios permitidos
+
+Ctrl+a : aclchg {usuarios} {permisos} -> Le cambias los permisos
+
+CTRL+a SHIFT-“+” (CTRL+a “*”) -> Ver usuarios conectados
+
+CTRL+a : wall {mensaje} -> Le envias un mensaje a todos los usuarios
+
