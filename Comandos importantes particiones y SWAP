@@ -1,0 +1,53 @@
+Mostrar tamaño de ficheros en bloque
+-------------------------------------
+du -h
+df -h
+
+
+fdisk -l ->Muestra los volumenes
+lsblk -f ->Muestra la informacion de todos los volumenes
+
+find {ruta} -size +{Tamaño}
+
+Transformar ext2 en ext3 -> tune2fs
+
+Checkeo de archivos
+---------------------
+fsck -t {ext,ntfs,etc}
+fsck -n {volumen} ->No repara, solo informa de errores
+fsck -a {volumen} ->Repara automaticamente los errores
+fsck -y {volumen} ->Responde yes automaticamente
+
+Que es el lost+found?
+Ubicacion donde se situan segmentos de archivos que no pueden volverse a unir con el archivo original
+
+SWAP
+----------
+Para editar el limite donde swapea
+
+Editar /proc/sys/vm/swappiness -> Valor entre 0 y 100 
+Funcionamiento -> 100-Valor = % de RAM donde debera swappear
+
+Creacion de swap
+----------------
+mkswap -L swap1 {Volumen}
+swapon ->Activa la swap
+swapoff ->Desactiva la swap
+
+/proc/swaps dicen las swaps activas
+
+Ejemplo fstab swap
+---------------------
+/dev/vdb2	swap	swap	defaults	0	0
+
+Prueba de swappear->Comando stress
+
+Creacion de fichero swap
+-------------------------
+dd if=/dev/zero of={Ruta de fichero} bs=1024 count={Tamaño en bytes}
+mkswap {fichero}
+chmod 600 {fichero}
+swapon -v {fichero}
+
+Tambien se puede meter en el fstab
+

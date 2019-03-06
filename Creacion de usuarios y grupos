@@ -1,0 +1,91 @@
+Creacion de usuarios bucle for
+-------------------------------
+user add->
+Parametros
+-m -> Le crea un home
+-s -> Le crea una terminal
+-d -> Le da el valor de su home
+-g -> Grupo principal
+-G -> Grupo secundario
+-p -> Contraseña ya cifrada
+for i in {1..10};do `useradd -s /bin/bash usuario$i`;done
+
+for i in {1..10};do `passwd usuario$i`;done
+
+Generador de contraseñas
+------------------------
+pwgen-> pwgen {Numero de caracteres} {Numero de contraseñas}
+
+Contraseñas encriptadas(mkpasswd)
+--------------------------------
+mkpasswd -m help ->Te dice los tipos de encriptacion
+-S -> Introduces a mano la sal
+mkpasswd -m {tipo} y introduces la contraseña, te la encripta solo
+
+Comando passwd
+----------------
+Parametros->
+-I -> Bloquea la cuenta
+-u -> Desbloquea la cuenta
+-d -> Suprime la contraseña
+-n -> Vida minima de contraseña
+-x -> Vida maxima de contraseña
+-w -> Numero de dias antes de aviso
+-i -> Periodo de gracia si vence la contraseña
+-S -> Estado de la contraseña
+
+Newusers
+--------
+newusers {archivo}
+MISMO FORMATO QUE /etc/passwd
+
+El archivo tiene que tener formato->usuario:contraseña:UID:GID:GCOS:dir_ppal:shell
+
+CONTRASEÑAS EN TEXTO PLANO.
+Si no existe GID se crea uno nuevo
+
+Chpasswd
+--------
+chpasswd < {archivo}
+El archivo tiene que tener formato -> usuario:contraseña
+
+CONTRASEÑAS EN TEXTO PLANO.
+
+Modificacion de Usuarios(ADMINISTRATOR MODO ON)
+-----------------------------------------------
+usermod {usuario}
+Parametros:
+-L -> Bloquea la cuenta
+-U -> Desbloquea la cuenta
+-e -> La cuenta expira en n dias -> usermod -e {dias} {usuario}
+-u -> Modifica el UID
+-l -> Cambia el nombre de usuario
+-d -> Cambia directorio principal
+-s -> Cambia la shell
+-g -> Cambia el grupo principal
+-G -> Añade grupos secundarios
+
+Borrar usuarios(ADMINISTRATOR TRAVIESO MODO ON)
+-----------------------------------------------
+userdel {usuario}
+Si queremos borrar su directorio home(-l)
+
+Creacion de grupos
+------------------
+groupadd {nombregrupo}
+Parametros:
+-g -> Especifica gid
+-f -> No crea grupo si ya existe
+Poner contraseña-> gpasswd {nombregrupo}
+
+Modificacion de Grupos(ADMINISTRATOR MODO ON)
+----------------------------------------------
+groupmod {nombregrupo}
+Parametros:
+-n -> Cambia de nombre al grupo
+-g -> Cambia el GID
+-A -> Añade un usuario al grupo(secundario)
+-R -> Quita a un usuario de un grupo
+
+Con el comando newgrp cambiamos el grupo primario de un usuario de manera temporal.
+Tienes que poner la contraseña del grupo

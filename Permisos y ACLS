@@ -1,0 +1,65 @@
+Permisos en ficheros
+---------------------
+
+r->Poder ver contenido del fichero, cargarlo en memoria y copiarlo
+w->Modificar fichero, no puedes eliminarlo
+x->Se puede ejecutar el fichero
+
+Permisos en directorios
+------------------------
+r->Listar contenido del directorio (ls o find)
+w->Se puede modificar los elementos del directorio,crear,borrar y nombrar ficheros(ESTE ES EL QUE PUEDE HACER QUE BORRE)
+x->Se puede acceder con cd y se puede listar (ls o find)
+
+Cambio de permisos
+------------------
+
+chmod {Octal}
+chmod {Simbolos}
+u -> usuario		r-> lectura
+g -> grupo		w-> escritura
+o -> otros		x-> ejecucion
+a -> todos
++ -> añade
+- -> retira
+= ->Permisos absolutos
+
+Cambio de propietario
+---------------------
+
+chown {usuario}
+chgrp {grupo}
+
+chown usuario:grupo
+Parametro -R cambia la propiedad recursivamente
+
+comando umask cambia la mascara (Son los permisos que retira)
+Default 022
+
+Permisos especiales
+-------------------
+Cambian los permisos por un usuario concreto para que lo puedan
+
+4000 -> SUID (usuario)
+2000 -> SGID (grupo)
+1000 -> Sticky bit (otros)
+
+ACL
+---------------
+
+apt-get install acl
+
+setfacl -> Hacer acls
+getfacl ->Conseguir acls
+
+Parametros
+-----------
+-R ->Recursivo
+-d -> Por defecto
+-m ->Modificar las acls
+-n -> No tiene en cuenta la mascara
+
+Ejemplo-> sudo setfacl -d -R -g u:usuario:rwx /home/usuarios/sistemas (ACL a un usuario)
+Ejemplo-> sudo setfacl -d -R -m g:explotacion:rx /home/usuarios/sistemas/prod  (ACL a un grupo)
+
+

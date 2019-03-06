@@ -1,0 +1,52 @@
+Sistemas de ficheros
+----------------------
+
+mkfs.exfat ->Windows y linux 			t=7
+mkfs.vfat ->Windows para datos menores 4gb	t=b
+mkfs.ntfs ->Windows para datos mayores 4gb	t=7
+mkfs.xfs ->Ni puta idea, creo que es linux	t=DEFECTO
+mkfs.ext(1-4) -> Linux		t=DEFECTO
+
+mkfs.{tipo} {Volumen} -L "Label"
+
+fdisk /dev/{loquesea} EN ROOT IMPORTANTE
+
+Ejemplo fstab
+----------------------
+UUID=29585dcd-a9da-4be9-ba1f-473ff0fc21c7 none            ext4    defaults              0       0
+
+UUID		punto de montaje	sistema de ficheros	opciones	dump	Quien arranque primero
+
+
+
+Para montar un dispositivo
+--------------------------
+mount {volumen} {Lugar de montaje}
+
+Si queremos recargar el kernel del fstab, partprobe(paquete parted) ->No es necesario si solo queremos usar mount -a, es para las separaciones de /home, etc
+
+Automontaje
+------------
+Paquete autofs
+
+Editar fichero /etc/auto.master
+
+Para recargar el autofs -> systemctl stop autofs, systemctl start autofs O systemctl restart autofs
+
+Ejemplo auto.master
+--------------------
+/DATOS/dinamico /etc/auto.dinamico      --timeout=2,sync,nodev,nosuid
+
+Punto de montaje	Archivo creado		El timeout significa cuanto tiempo tiene que estar un usuario fuera para que se autodesmonte
+
+Debemos crear un fichero auto.{nombre} para que se pueda automontar
+
+Ejemplo auto.{nombre}
+-------------------------
+primero -fstype=ext3    UUID=3ab3f16b-b1d3-4c8c-ad87-ddb37fc62eb2
+
+Nombre de carpeta	Tipo de Archivos	UUID,Label o Volumen
+
+Recargamos el autofs
+Y hacemos un enlace a la ruta, en este caso
+ln -s /Datos/dinamico/primero/ enlaceaprimero

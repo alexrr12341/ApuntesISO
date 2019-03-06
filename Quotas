@@ -1,0 +1,45 @@
+Quotas
+------------
+
+Ejemplo fstab con quotas
+------------------------
+UUID=29585dcd-a9da-4be9-ba1f-473ff0fc21c7 none            ext4    defaults,usrquota,grpquota              0       0
+
+									En las opciones se añaden
+
+Debemos desmontar y montar el volumen para que se hagan las quotas
+
+mount -o remount {Ruta de montaje}
+
+umount {Ruta de montaje} , mount {Volumen} {Ruta de montaje}
+
+Para crear las quotas
+---------------------
+
+quotacheck -ugv {Ruta de montaje} ->Genera aquota.user y aquota.grp
+quotacheck -c {Ruta de montaje} -> Genera aquota.user
+
+**IMPORTANTE**
+Cambiar editor -> update-alternatives --config editor
+
+Para editar quotas
+
+edquota -u {usuario} ->Quotas para usuarios
+
+edquota -g {grupo} ->Quotas para grupos
+
+edquota -t ->Editamos el periodo de gracia (Limite Blando (Soft))
+
+Para ver las quotas de los usuarios o grupos
+
+repquota -s {Ruta de montaje}
+
+Ejemplo de edquota
+------------------
+Filesystem 	blocks     soft  hard  	     inodes     soft     hard
+  /dev/vdb1       4         0    1024          5         0       10
+
+SOLO DEBEMOS CAMBIAR EL SOFT Y EL HARD (blocks para kb permitidos y inodes para ficheros permitidos)
+
+quotaon -> Enciende las quotas
+quotaoff ->Apaga las quotas
